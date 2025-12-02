@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "تمثال الملك",
+    "image": "/images/statue1.jpg",
+    "audio": "/audio/statue1.mp3",
+    "description": "تمثال للملك من العصر الوسيط."
+  },
+  {
+    "id": 2,
+    "name": "المرمر القديم",
+    "image": "/images/marble1.jpg",
+    "audio": "/audio/marble1.mp3",
+    "description": "قطعة من المرمر تعود للعصر القديم."
+  }
+]

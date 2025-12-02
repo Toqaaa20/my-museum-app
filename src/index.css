@@ -28,6 +28,23 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  
+  background-image: url("/images/wallpaper.jpeg");
+  background-size: cover;       
+  background-position: center; 
+  background-repeat: no-repeat; 
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: -1;
 }
 
 h1 {

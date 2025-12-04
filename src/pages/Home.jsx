@@ -5,7 +5,7 @@ import ArtifactCard from "../components/ArtifactCard";
 export default function Home() {
   const [selected, setSelected] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [hoveredId, setHoveredId] = useState(null); 
   const handleClick = (artifact) => {
     setSelected(artifact);
     alert(`You clicked on ${artifact.name}!`);
@@ -16,24 +16,28 @@ export default function Home() {
     zIndex: 1,
     width: "100%",
     color: "white",
-    WebkitTextStroke: "1px black",
+    padding: "0 20px",
     textAlign: "center",
+    fontWeight: "700",
+    letterSpacing: "0.5px",
+     boxSizing: "border-box",
   };
 
- const pageStyle = {
-  width: "100%",
-   height: "100vh",
-  padding: "20px",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-
-  backgroundImage: 'url("/images/wallpaper.jpg")',
- backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-};
-
+  const pageStyle = {
+    width: "100vw",
+    minHeight: "100vh",
+    margin: 0,
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    backgroundImage: 'url("/images/wallpaper.jpg")',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+     boxSizing: "border-box",
+  };
 
   const filteredArtifacts = artifacts.filter((artifact) =>
     artifact.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -42,7 +46,9 @@ export default function Home() {
   return (
     <div style={pageStyle}>
       <div style={contentStyle}>
-        <h1>Welcome to the Museum Experience</h1>
+        <h1 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
+          Welcome to the Museum Experience
+        </h1>
 
         <input
           type="text"
@@ -55,8 +61,13 @@ export default function Home() {
             width: "80%",
             maxWidth: "300px",
             borderRadius: "8px",
-            border: "1px solid #ccc",
+            border: "1px solid white",
             display: "block",
+            backgroundColor: "rgba(0,0,0,0.3)", // شفاف
+            color: "white",
+            outline: "none",
+            backdropFilter: "blur(1px)",
+            fontWeight: 600,
           }}
         />
 
@@ -69,15 +80,25 @@ export default function Home() {
           }}
         >
           {filteredArtifacts.map((artifact) => (
-            <ArtifactCard
+            <div
               key={artifact.id}
-              artifact={artifact}
-              onClick={handleClick}
-            />
+              onMouseEnter={() => setHoveredId(artifact.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              style={{
+                transform: hoveredId === artifact.id ? "scale(1.1)" : "scale(1)",
+                transition: "transform 0.3s, filter 0.3s",
+                filter:
+                  hoveredId && hoveredId !== artifact.id
+                    ? "blur(2px)"
+                    : "blur(0)",
+                zIndex: hoveredId === artifact.id ? 2 : 1,
+              }}
+            >
+              <ArtifactCard artifact={artifact} onClick={handleClick} />
+            </div>
           ))}
         </div>
       </div>
     </div>
   );
 }
-

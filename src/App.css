@@ -1,19 +1,25 @@
+/* خلي الصفحة تاخد العرض كامل بدون حدود */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
   text-align: center;
+  overflow: auto;
 }
 
+/* لو مش هتستخدمي اللوجو احذفي دول، بس هسيبهم مضبوطين */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -33,10 +39,24 @@
   }
 }
 
+/* مش ضرورية، بس سيبتها من غير تغيير */
 .card {
   padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+
+  background-image: url("/images/wallpaper.jpg"); /* حطي هنا مسار الصورة بتاعتك */
+  background-size: cover;           /* الصورة هتغطي الصفحة كلها */
+  background-position: center;      /* تتوسط الصفحة */
+  background-repeat: no-repeat;     /* من غير تكرار */
+  background-attachment: fixed;     /* تخلي الصورة ثابتة لو بتحبي تأثير parallax */
 }

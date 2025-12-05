@@ -15,6 +15,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+.logo-text {
+    font-size: 3.8rem; /* Set a size significantly larger than 2.5rem */
+    font-weight: 900;
+    /* You might need to use !important if the selector is weak */
+}
 
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
@@ -53,10 +58,4 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
-
-  background-image: url("/images/wallpaper.jpg"); /* حطي هنا مسار الصورة بتاعتك */
-  background-size: cover;           /* الصورة هتغطي الصفحة كلها */
-  background-position: center;      /* تتوسط الصفحة */
-  background-repeat: no-repeat;     /* من غير تكرار */
-  background-attachment: fixed;     /* تخلي الصورة ثابتة لو بتحبي تأثير parallax */
 }

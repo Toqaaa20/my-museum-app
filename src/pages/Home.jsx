@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <div style={pageStyle}>
       <div style={contentStyle}>
-        <h1 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
+        <h1 style={{ fontSize: "3.5rem", marginBottom: "20px" }}>
           Welcome to the Museum Experience
         </h1>
 

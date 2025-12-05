@@ -63,7 +63,7 @@ export default function Home() {
             borderRadius: "8px",
             border: "1px solid white",
             display: "block",
-            backgroundColor: "rgba(0,0,0,0.3)", // شفاف
+            backgroundColor: "rgba(0,0,0,0.3)", 
             color: "white",
             outline: "none",
             backdropFilter: "blur(1px)",

@@ -1,4 +1,4 @@
-/* خلي الصفحة تاخد العرض كامل بدون حدود */
+
 #root {
   width: 100%;
   height: 100%;
@@ -8,7 +8,7 @@
   overflow: auto;
 }
 
-/* لو مش هتستخدمي اللوجو احذفي دول، بس هسيبهم مضبوطين */
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -16,9 +16,9 @@
   transition: filter 300ms;
 }
 .logo-text {
-    font-size: 3.8rem; /* Set a size significantly larger than 2.5rem */
+    font-size: 3.8rem;
     font-weight: 900;
-    /* You might need to use !important if the selector is weak */
+   
 }
 
 .logo:hover {

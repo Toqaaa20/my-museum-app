@@ -5,7 +5,7 @@ export const artifacts = [
     period: "New Kigdom",
     material: "Painted Limestone",
     image: "/images/statue1.jpeg",
-    //description: "A ceremonial scepter used in royal rituals.",
+   //do not forget to add description later
   },
   {
     id: 2,
@@ -13,6 +13,6 @@ export const artifacts = [
     period: "New Kingdom",
     material: "Marble",
     image: "/images/nefertiti.webp",
-    //description: "A marble piece from the old kingdom.",
+    //do not forget to add description later
   }
 ];

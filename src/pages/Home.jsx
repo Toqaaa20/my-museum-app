@@ -136,7 +136,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* No Results Message */}
+       
         {filteredArtifacts.length === 0 && (
           <div style={{ marginTop: "80px", textAlign: "center" }}>
             <p style={{ fontSize: "1.4rem", color: "gold", opacity: 0.7 }}>

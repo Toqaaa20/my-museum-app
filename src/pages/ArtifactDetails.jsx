@@ -7,51 +7,49 @@ export default function ArtifactDetails() {
   const { id } = useParams();
   const artifact = artifacts.find((item) => item.id.toString() === id);
   
-  // States للتحكم في الصوت والنص
+ 
   const audioRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
 
-  // تحديث الوقت أثناء تشغيل الصوت
+
   const handleTimeUpdate = () => {
     setCurrentTime(audioRef.current.currentTime);
   };
 
   if (!artifact) return <div style={{ color: "white", textAlign: "center", padding: "100px" }}>Loading...</div>;
 
-  // هفترض إن عندك في الـ data ملف صوت لكل قطعة
-  // لو لسه مش عندك، ممكن تستخدمي رابط تجريبي
+
   const storyText = artifact.description || "Ancient Egypt was a civilization of ancient North Africa, concentrated along the lower reaches of the Nile River. This artifact represents the dignity and craftsmanship of that era.";
   
-  // تقسيم النص لكلمات (نفترض إن كل كلمة بتاخد 0.5 ثانية مثلاً للتجربة)
-  // في الحقيقة، يفضل تقسيم النص لمصفوفة فيها الكلمة والوقت بتاعها
+
   const words = storyText.split(" ");
 
   return (
     <div style={{ 
       minHeight: "100vh", 
-      backgroundColor: "transparent", // عشان يبين الخلفية الموحدة
+      backgroundColor: "transparent",
       color: "white",
       padding: "120px 5% 40px",
       display: "flex",
       gap: "50px",
-      flexDirection: "row", // يمين وشمال
+      flexDirection: "row", 
       alignItems: "flex-start"
     }}>
       
-      {/* الجزء الشمال: النص السردي (Narrative) */}
+     
       <div style={{ 
         flex: "1", 
         height: "80vh", 
         overflowY: "auto", 
         paddingRight: "30px",
         textAlign: "justify",
-        scrollbarWidth: "none" // إخفاء سكرول بار
+        scrollbarWidth: "none" 
       }}>
         <h1 style={{ fontSize: "3rem", color: "gold", marginBottom: "30px", fontWeight: "900" }}>
           {artifact.name}
         </h1>
         
-        {/* مشغل الصوت (مخفي) */}
+      
         <audio 
           ref={audioRef} 
           src={artifact.audioPath || "/audio/sample.mp3"} 
@@ -62,8 +60,7 @@ export default function ArtifactDetails() {
 
         <div style={{ fontSize: "1.8rem", lineHeight: "1.8", fontWeight: "700" }}>
           {words.map((word, index) => {
-            // معادلة بسيطة للتجربة: كل كلمة بتنور بناءً على ترتيبها
-            // لو عايزة دقة 100% بنستخدم مصفوفة أوقات (Timestamps)
+          
             const isActive = currentTime > index * 0.4; 
             
             return (
@@ -84,7 +81,7 @@ export default function ArtifactDetails() {
         </div>
       </div>
 
-      {/* الجزء اليمين: الموديل الثلاثي الأبعاد */}
+   
       <div style={{ 
         flex: "1", 
         position: "sticky", 
@@ -117,7 +114,7 @@ export default function ArtifactDetails() {
           />
         </div>
 
-        {/* معلومات سريعة تحت الموديل */}
+      
         <div style={{ marginTop: "20px", textAlign: "center", width: "100%" }}>
            <p style={{ color: "gold", fontSize: "1.2rem", letterSpacing: "2px" }}>
              {artifact.kingdom} | {artifact.material}

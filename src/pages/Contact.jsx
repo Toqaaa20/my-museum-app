@@ -38,7 +38,7 @@ export default function Contact() {
     alignItems: "center",
     justifyContent: "center",
     padding: "120px 20px 60px", 
-    backgroundColor: "transparent", // لضمان ظهور خلفية الموقع الأساسية
+    backgroundColor: "transparent", 
     boxSizing: "border-box",
   };
 
@@ -46,11 +46,11 @@ export default function Contact() {
     width: "95%",
     maxWidth: "550px",
     padding: "50px 40px",
-    backgroundColor: "rgba(0, 0, 0, 0.75)", // زجاجي داكن فخم
+    backgroundColor: "rgba(0, 0, 0, 0.75)", 
     backdropFilter: "blur(20px)",
     WebkitBackdropFilter: "blur(20px)",
     borderRadius: "28px",
-    border: "1px solid rgba(255, 215, 0, 0.3)", // برواز ذهبي رقيق كالكروت
+    border: "1px solid rgba(255, 215, 0, 0.3)", 
     boxShadow: "0 25px 50px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 215, 0, 0.05)",
     display: "flex",
     flexDirection: "column",

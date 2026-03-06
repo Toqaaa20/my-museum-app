@@ -8,12 +8,12 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        {/* اللوجو */}
+      
         <Link to="/" className="logo-link">
           <img src={logo} alt="ARCHIVE logo" className="logo-img" />
         </Link>
 
-        {/* الروابط */}
+
         <div className="nav-links">
           <Link to="/" className={location.pathname === "/" ? "nav-item active" : "nav-item"}>
             Home

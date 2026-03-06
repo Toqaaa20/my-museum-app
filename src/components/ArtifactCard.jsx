@@ -10,13 +10,14 @@ export default function ArtifactCard({ artifact }) {
         overflow: "hidden",
         position: "relative",
         cursor: "pointer",
-        // ظل ناعم جداً واحترافي
+
         boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
         border: "1px solid rgba(255, 215, 0, 0.1)",
         transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
-      {/* طبقة الصورة مع تأثير التكبير */}
+
+
       <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
         <img
           src={artifact.image}
@@ -31,7 +32,7 @@ export default function ArtifactCard({ artifact }) {
         />
       </div>
 
-      {/* طبقة التظليل السفلي (Gradient Overlay) عشان الكلام يبان */}
+    
       <div style={{
         position: "absolute",
         bottom: 0,
@@ -46,25 +47,25 @@ export default function ArtifactCard({ artifact }) {
         textAlign: "left"
       }}>
         <span style={{ 
-          color: "gold", 
+          margin: 0, 
+          color: "white", 
+          fontSize: "1.5rem", 
+          fontWeight: "600",
+          fontFamily: "'Playfair Display', serif"
+        }}>
+          {artifact.name}
+        </span>
+        <h3 style={{ 
+         color: "gold", 
           fontSize: "0.8rem", 
           letterSpacing: "2px", 
           textTransform: "uppercase",
           marginBottom: "5px" 
         }}>
           {artifact.kingdom}
-        </span>
-        <h3 style={{ 
-          margin: 0, 
-          color: "white", 
-          fontSize: "1.5rem", 
-          fontWeight: "600",
-          fontFamily: "'Playfair Display', serif" // خط فخم للمتاحف
-        }}>
-          {artifact.name}
         </h3>
         
-        {/* خط ذهبي رفيع بيظهر تحت الاسم */}
+       
         <div style={{ 
           width: "40px", 
           height: "2px", 
@@ -73,7 +74,7 @@ export default function ArtifactCard({ artifact }) {
         }}></div>
       </div>
 
-      {/* إضافة Hover Effect في CSS (اختياري لو بتستخدمي ملف CSS) */}
+     
       <style>{`
         .artifact-card:hover {
           transform: translateY(-10px);

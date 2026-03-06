@@ -60,12 +60,12 @@ body {
  body {
   margin: 0;
   padding: 0;
-  /* الخلفية هتتحط مرة واحدة هنا للموقع كله */
+
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), 
   url("/images/museum-bg.png") !important;
   background-size: cover !important;
   background-position: center !important;
-  background-attachment: fixed !important; /* دي بتخلي الصورة ثابتة والصفحات بتتحرك فوقها */
+  background-attachment: fixed !important; 
   background-color: #000; 
   min-height: 100vh;
  }

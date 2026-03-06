@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 85px;
-  z-index: 2000; /* أعلى من أي حاجة في الصفحة */
+  z-index: 2000; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@
   background: rgba(0, 0, 0, 0.11);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(255, 215, 0, 0.2); /* خط ذهبي رفيع جداً */
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2); 
 }
 
 .nav-container {
@@ -24,7 +24,7 @@
 }
 
 .logo-img {
-  /* كبري الرقم ده زي ما تحبي (مثلاً 70px أو 80px) */
+ 
   height: 150px; 
   width: auto;
   transition: transform 0.3s ease;
@@ -57,7 +57,7 @@
   color: gold;
 }
 
-/* حركة الخط الذهبي اللي بيظهر تحت اللينك */
+
 .nav-item::after {
   content: '';
   position: absolute;
@@ -101,9 +101,9 @@
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
 }
 
-/* تعديل للموبايل */
+
 @media (max-width: 768px) {
   .nav-links { gap: 15px; }
   .nav-item { font-size: 0.7rem; letter-spacing: 1px; }
-  .nav-explore-btn { display: none; } /* بنخفيه في الموبايل عشان الزحمة */
+  .nav-explore-btn { display: none; } 
 }

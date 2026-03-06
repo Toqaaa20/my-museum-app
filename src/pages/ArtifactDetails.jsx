@@ -1,51 +1,110 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { artifacts } from "../data";
+import { useState, useRef, useEffect } from "react";
 import "@google/model-viewer";
 
 export default function ArtifactDetails() {
   const { id } = useParams();
   const artifact = artifacts.find((item) => item.id.toString() === id);
+  
+  // States للتحكم في الصوت والنص
+  const audioRef = useRef(null);
+  const [currentTime, setCurrentTime] = useState(0);
+
+  // تحديث الوقت أثناء تشغيل الصوت
+  const handleTimeUpdate = () => {
+    setCurrentTime(audioRef.current.currentTime);
+  };
 
   if (!artifact) return <div style={{ color: "white", textAlign: "center", padding: "100px" }}>Loading...</div>;
+
+  // هفترض إن عندك في الـ data ملف صوت لكل قطعة
+  // لو لسه مش عندك، ممكن تستخدمي رابط تجريبي
+  const storyText = artifact.description || "Ancient Egypt was a civilization of ancient North Africa, concentrated along the lower reaches of the Nile River. This artifact represents the dignity and craftsmanship of that era.";
+  
+  // تقسيم النص لكلمات (نفترض إن كل كلمة بتاخد 0.5 ثانية مثلاً للتجربة)
+  // في الحقيقة، يفضل تقسيم النص لمصفوفة فيها الكلمة والوقت بتاعها
+  const words = storyText.split(" ");
 
   return (
     <div style={{ 
       minHeight: "100vh", 
-      backgroundColor: "#0a0a0a", 
+      backgroundColor: "transparent", // عشان يبين الخلفية الموحدة
       color: "white",
-      padding: "20px"
+      padding: "120px 5% 40px",
+      display: "flex",
+      gap: "50px",
+      flexDirection: "row", // يمين وشمال
+      alignItems: "flex-start"
     }}>
       
+      {/* الجزء الشمال: النص السردي (Narrative) */}
       <div style={{ 
-        maxWidth: "1200px", 
-        margin: "0 auto", 
-        display: "flex", 
-        flexDirection: "column", 
-        alignItems: "center" 
+        flex: "1", 
+        height: "80vh", 
+        overflowY: "auto", 
+        paddingRight: "30px",
+        textAlign: "justify",
+        scrollbarWidth: "none" // إخفاء سكرول بار
       }}>
-        
-        {/* marginTop للعنوان بس عشان ينزل تحت النيف بار */}
-        <h1 style={{ 
-          fontSize: "3rem", 
-          color: "gold", 
-          marginTop: "80px", // المسافة دي عشان النيف بار
-          marginBottom: "20px", 
-          fontWeight: "1000" 
-        }}>
+        <h1 style={{ fontSize: "3rem", color: "gold", marginBottom: "30px", fontWeight: "900" }}>
           {artifact.name}
         </h1>
+        
+        {/* مشغل الصوت (مخفي) */}
+        <audio 
+          ref={audioRef} 
+          src={artifact.audioPath || "/audio/sample.mp3"} 
+          onTimeUpdate={handleTimeUpdate}
+          controls
+          style={{ marginBottom: "20px", width: "100%", opacity: 0.5 }}
+        />
 
-        {/* مكان اللي شايل الموديل */}
+        <div style={{ fontSize: "1.8rem", lineHeight: "1.8", fontWeight: "700" }}>
+          {words.map((word, index) => {
+            // معادلة بسيطة للتجربة: كل كلمة بتنور بناءً على ترتيبها
+            // لو عايزة دقة 100% بنستخدم مصفوفة أوقات (Timestamps)
+            const isActive = currentTime > index * 0.4; 
+            
+            return (
+              <span 
+                key={index} 
+                style={{
+                  color: isActive ? "gold" : "rgba(255, 255, 255, 0.15)",
+                  textShadow: isActive ? "0 0 15px gold" : "none",
+                  transition: "all 0.4s ease",
+                  display: "inline-block",
+                  marginRight: "10px"
+                }}
+              >
+                {word}
+              </span>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* الجزء اليمين: الموديل الثلاثي الأبعاد */}
+      <div style={{ 
+        flex: "1", 
+        position: "sticky", 
+        top: "120px",
+        height: "70vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}>
         <div style={{ 
           width: "100%", 
-          height: "600px", 
-          backgroundColor: "rgba(255, 255, 255, 0.03)", 
-          borderRadius: "30px",
+          height: "100%", 
+          backgroundColor: "rgba(0, 0, 0, 0.4)", 
+          borderRadius: "40px",
           border: "1px solid rgba(255, 215, 0, 0.2)",
-          marginBottom: "30px",
-          display: "flex", //عشان نضمن السنترة جوا
+          backdropFilter: "blur(10px)",
+          display: "flex",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
+          boxShadow: "0 0 50px rgba(0,0,0,0.5)"
         }}>
           <model-viewer
             src={artifact.modelPath}
@@ -54,22 +113,18 @@ export default function ArtifactDetails() {
             camera-controls
             shadow-intensity="2"
             exposure="1.2"
-            environment-image="neutral"
-            style={{ width: "95%", height: "95%" }} 
-          >
-          </model-viewer>
+            style={{ width: "90%", height: "90%" }} 
+          />
         </div>
 
-        <div style={{ textAlign: "center", maxWidth: "800px" }}>
-          <h2 style={{ color: "gold", borderBottom: "1px solid gold", display: "inline-block", paddingBottom: "5px" }}>
-            About the Artifact
-          </h2>
-          <p style={{ fontSize: "1.2rem", marginTop: "20px", lineHeight: "1.6" }}>
-            <strong>Kingdom:</strong> {artifact.kingdom} <br />
-            <strong>Material:</strong> {artifact.material}
-          </p>
+        {/* معلومات سريعة تحت الموديل */}
+        <div style={{ marginTop: "20px", textAlign: "center", width: "100%" }}>
+           <p style={{ color: "gold", fontSize: "1.2rem", letterSpacing: "2px" }}>
+             {artifact.kingdom} | {artifact.material}
+           </p>
         </div>
       </div>
+
     </div>
   );
 }

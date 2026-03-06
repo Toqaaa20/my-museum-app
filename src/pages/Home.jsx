@@ -9,137 +9,140 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [hoveredId, setHoveredId] = useState(null);
 
-  const handleClick = (artifact) => {
-    alert(`You clicked on ${artifact.name}!`);
-  };
-
-
   const kingdoms = ["all", "Old Kingdom", "Middle Kingdom", "New Kingdom", "Greco-Roman Period", "Ptolemaic Period"];
 
- 
   const filteredArtifacts = artifacts.filter((artifact) => {
-    const matchesSearch = artifact.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-
- 
-    const matchesKingdom =
-      kingdomFilter === "all" || artifact.kingdom === kingdomFilter;
-
+    const matchesSearch = artifact.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesKingdom = kingdomFilter === "all" || artifact.kingdom === kingdomFilter;
     return matchesSearch && matchesKingdom;
   });
 
-  // --- الستايلات ---
+
+
   const pageStyle = {
-    width: "100vw",
+    width: "100%",
     minHeight: "100vh",
-    padding: "20px",
+    padding: "120px 20px 60px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundImage: 'url("/images/wallpaper.jpg")',
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundAttachment: "fixed", 
+    backgroundColor: "transparent", 
     boxSizing: "border-box",
   };
 
   const buttonStyle = (k) => ({
-    padding: "10px 20px",
-    margin: "5px",
-    cursor: "pointer",
-    borderRadius: "25px",
-    border: "1px solid white",
-    backgroundColor: kingdomFilter === k ? "gold" : "rgba(255, 255, 255, 0.1)",
-    color: kingdomFilter === k ? "black" : "white",
-    fontWeight: "600",
-    transition: "all 0.3s ease",
-    backdropFilter: "blur(5px)",
-  });
+  padding: "8px 20px",  
+  margin: "4px",
+  cursor: "pointer",
+  borderRadius: "20px", 
+  
+
+  border: kingdomFilter === k ? "1.5px solid gold" : "1px solid rgba(255,255,255,0.15)",
+  backgroundColor: kingdomFilter === k ? "gold" : "rgba(255, 255, 255, 0.05)",
+  color: kingdomFilter === k ? "black" : "rgba(255, 255, 255, 0.8)",
+  
+  
+  fontWeight: "700", 
+  fontSize: "0.85rem", 
+  textTransform: "capitalize",
+  
+  transition: "all 0.3s ease",
+  backdropFilter: "blur(5px)",
+  
+ 
+  whiteSpace: "nowrap", 
+});
+
+  const gridContainerStyle = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, 320px)", 
+    gap: "50px", 
+    padding: "40px 20px",
+    width: "100%", 
+    maxWidth: "1200px",
+    margin: "0 auto",
+    justifyContent: "center", 
+  };
 
   return (
     <div style={pageStyle}>
-      <div style={{ position: "relative", zIndex: 1, width: "100%", textAlign: "center", color: "white" }}>
+      <div style={{ width: "100%", textAlign: "center", color: "white" }}>
         
-        <h1 style={{ fontSize: "3.1rem", marginBottom: "30px", fontWeight: "1000", textShadow: "2px 2px 10px rgba(0,0,0,0.5)" }}>
-          Welcome to the Museum Experience
+        <h1 style={{ 
+          fontSize: "3.5rem", 
+          fontWeight: "900", 
+          color: "gold",
+          letterSpacing: "3px",
+          textShadow: "0 10px 20px rgba(0,0,0,0.6)",
+          margin: "0 0 10px 0"
+        }}>
+          THE ROYAL EGYPTIAN GALLERY
         </h1>
+        
+        <p style={{ marginBottom: "40px", fontSize: "1rem", opacity: 0.6, letterSpacing: "3px" }}>
+          EXPLORE THE DIGNITY OF ANCIENT EGYPT, WHERE EVERY ARTIFACT TELLS A STORY OF GLORY AND MYSTERY
+        </p>
 
-      
+        
         <input
           type="text"
           placeholder="Search for an artifact..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{
-            padding: "12px",
-            margin: "0 auto 20px",
-            width: "80%",
-            maxWidth: "350px",
-            borderRadius: "30px",
-            border: "1px solid rgba(255,255,255,0.5)",
-            display: "block",
-            backgroundColor: "rgba(0,0,0,0.4)",
+            padding: "16px 30px",
+            marginBottom: "40px",
+            width: "90%",
+            maxWidth: "450px",
+            borderRadius: "50px",
+            border: "1px solid rgba(255,215,0,0.2)",
+            backgroundColor: "rgba(0,0,0,0.5)",
             color: "white",
             outline: "none",
-            backdropFilter: "blur(5px)",
+            backdropFilter: "blur(15px)",
+            textAlign: "center",
+            fontSize: "1rem",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.3)"
           }}
         />
 
-      
-        <div style={{ marginBottom: "40px", display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
-          <FaFilter style={{ color: "gold", marginRight: "10px", fontSize: "1.2rem" }} />
+        {/* Filter Buttons */}
+        <div style={{ marginBottom: "60px", display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
+          <FaFilter style={{ color: "gold", marginRight: "10px" }} />
           {kingdoms.map((k) => (
-            <button 
-              key={k} 
-              onClick={() => setKingdomFilter(k)} 
-              style={buttonStyle(k)}
-            >
+            <button key={k} onClick={() => setKingdomFilter(k)} style={buttonStyle(k)}>
               {k === "all" ? "All Eras" : k}
             </button>
           ))}
         </div>
 
+        {/* Artifacts Grid */}
+        <div style={gridContainerStyle}>
+          {filteredArtifacts.map((artifact) => (
+            <Link key={artifact.id} to={`/artifact/${artifact.id}`} style={{ textDecoration: "none" }}>
+              <div
+                onMouseEnter={() => setHoveredId(artifact.id)}
+                onMouseLeave={() => setHoveredId(null)}
+                style={{
+                  transform: hoveredId === artifact.id ? "translateY(-15px) scale(1.02)" : "translateY(0) scale(1)",
+                  transition: "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                  filter: hoveredId && hoveredId !== artifact.id ? "brightness(0.4) blur(3px)" : "none",
+                  zIndex: hoveredId === artifact.id ? 10 : 1,
+                }}
+              >
+                <ArtifactCard artifact={artifact} />
+              </div>
+            </Link>
+          ))}
+        </div>
 
-<div
-  style={{
-    display: "grid",
-  
-    gridTemplateColumns: "repeat(3, 1fr)", 
-    gap: "30px",
-    padding: "20px",
-    width: "80%", 
-    maxWidth: "1200px",
-    margin: "0 auto",
-  }}
-        >
-{filteredArtifacts.map((artifact) => (
-    <Link
-      key={artifact.id}
-      to={`/artifact/${artifact.id}`}
-      style={{ textDecoration: "none" }}
-    >
-      <div
-        onMouseEnter={() => setHoveredId(artifact.id)}
-        onMouseLeave={() => setHoveredId(null)}
-        style={{
-          transform: hoveredId === artifact.id ? "scale(1.08)" : "scale(1)",
-          transition: "all 0.4s ease",
-          filter: hoveredId && hoveredId !== artifact.id ? "blur(3px)" : "none",
-          zIndex: hoveredId === artifact.id ? 2 : 1,
-        }}
-      >
-        <ArtifactCard artifact={artifact} onClick={handleClick} />
-      </div>
-    </Link>
-  ))}
-</div>
-
-       
+        {/* No Results Message */}
         {filteredArtifacts.length === 0 && (
-          <p style={{ marginTop: "50px", fontSize: "1.2rem", opacity: 0.8 }}>
-            No artifacts found in this kingdom...
-          </p>
+          <div style={{ marginTop: "80px", textAlign: "center" }}>
+            <p style={{ fontSize: "1.4rem", color: "gold", opacity: 0.7 }}>
+              The sands of time haven't revealed this treasure yet...
+            </p>
+          </div>
         )}
       </div>
     </div>

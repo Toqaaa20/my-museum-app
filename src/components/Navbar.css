@@ -1,38 +1,109 @@
 .navbar {
-  background: rgba(0, 0, 0, 0.1); 
-  color: black;
-  padding: 10px 25px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85px;
+  z-index: 2000; /* أعلى من أي حاجة في الصفحة */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease;
+  background: rgba(0, 0, 0, 0.11);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2); /* خط ذهبي رفيع جداً */
+}
+
+.nav-container {
+  width: 90%;
+  max-width: 1300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
- backdrop-filter: blur(1px); 
-  z-index: 100;
-}
-.logo {
-  font-size: 20px;
-  font-weight: bold;
 }
 
 .logo-img {
-  height: 180px;    
+  /* كبري الرقم ده زي ما تحبي (مثلاً 70px أو 80px) */
+  height: 150px; 
   width: auto;
-  object-fit: contain;
-  z-index: 1;
+  transition: transform 0.3s ease;
+
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3)); 
 }
 
-.nav-links a {
-  margin-left: 20px;
-  color: white;
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+.nav-links {
+  display: flex;
+  gap: 45px; 
+  align-items: center;
+}
+
+.nav-item {
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  font-size: 18px;
-   z-index: 9999;
+
+  font-size: 1rem; 
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
 }
 
-.nav-links a:hover {
-  text-decoration: underline;
+.nav-item:hover {
+  color: gold;
+}
+
+/* حركة الخط الذهبي اللي بيظهر تحت اللينك */
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: gold;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px gold;
+}
+
+.nav-item:hover::after, 
+.nav-item.active::after {
+  width: 100%;
+}
+
+.nav-item.active {
+  color: gold;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.nav-explore-btn {
+  background: transparent;
+  border: 1px solid gold;
+  color: gold;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.nav-explore-btn:hover {
+  background: gold;
+  color: black;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+/* تعديل للموبايل */
+@media (max-width: 768px) {
+  .nav-links { gap: 15px; }
+  .nav-item { font-size: 0.7rem; letter-spacing: 1px; }
+  .nav-explore-btn { display: none; } /* بنخفيه في الموبايل عشان الزحمة */
 }

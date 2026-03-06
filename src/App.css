@@ -2,10 +2,10 @@
 #root {
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  overflow: auto;
+background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('/images/museum-bg.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
 }
 
 
@@ -57,8 +57,16 @@
 }
 
 body {
+ body {
   margin: 0;
   padding: 0;
-  width: 100%;
+  /* الخلفية هتتحط مرة واحدة هنا للموقع كله */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), 
+  url("/images/museum-bg.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important; /* دي بتخلي الصورة ثابتة والصفحات بتتحرك فوقها */
+  background-color: #000; 
   min-height: 100vh;
+ }
 }

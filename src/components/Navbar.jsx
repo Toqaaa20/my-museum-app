@@ -1,15 +1,34 @@
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";  
+
 export default function Navbar() {
+  const location = useLocation();
+
   return (
     <nav className="navbar">
-     <img src={logo} alt="ARCHIVE logo" className="logo-img" />
+      <div className="nav-container">
+        {/* اللوجو */}
+        <Link to="/" className="logo-link">
+          <img src={logo} alt="ARCHIVE logo" className="logo-img" />
+        </Link>
 
-      <div className="nav-links">
-        <Link to="/">Home</Link>
-        <Link to="/about museum">About Museum</Link>
-        <Link to="/contact">Contact Us</Link>
+        {/* الروابط */}
+        <div className="nav-links">
+          <Link to="/" className={location.pathname === "/" ? "nav-item active" : "nav-item"}>
+            Home
+          </Link>
+          <Link to="/about" className={location.pathname === "/about" ? "nav-item active" : "nav-item"}>
+            About Museum
+          </Link>
+          <Link to="/contact" className={location.pathname === "/contact" ? "nav-item active" : "nav-item"}>
+            Contact Us
+          </Link>
+        </div>
+
+        
+    
+      
       </div>
     </nav>
   );
